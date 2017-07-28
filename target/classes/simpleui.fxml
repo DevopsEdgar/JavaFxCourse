@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox alignment="CENTER" spacing="10"
+      xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="SimpleController"
+>
+    <children>
+        <Label text="User Name"/>
+        <TextField fx:id="txtField" promptText="Username"/>
+        <Button text="Connect"/>
+        <VBox>
+            <Label text="${txtField.text}"/>
+            <Button text="Down"/>
+            <Button text="Further Down"/>
+        </VBox>
+        <GridPane>
+            <children>
+                <Label text="${txtField.text}" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Button minWidth="150" text="Down" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Button text="Further Down" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            </children>
+        </GridPane>
+    </children>
+
+</HBox>
