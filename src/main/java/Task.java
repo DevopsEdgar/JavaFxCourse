@@ -1,51 +1,107 @@
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.ReadOnlyBooleanWrapper;
-import javafx.beans.property.SimpleIntegerProperty;
+//import javafx.beans.binding.Bindings;
+//import javafx.beans.binding.NumberBinding;
+//import javafx.beans.property.IntegerProperty;
+//import javafx.beans.property.SimpleIntegerProperty;
+//import javafx.beans.property.SimpleStringProperty;
+//import javafx.beans.property.StringProperty;
+
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.property.StringProperty;
 
 public class Task {
 
-    public static void main(String[] args) {
-        SimpleIntegerProperty intProp = new SimpleIntegerProperty();
-        intProp.set(15);
-        System.out.println(intProp.get());
+//    public static void main(String[] args) {
+//        StringProperty lastNameProp = new SimpleStringProperty();
+//        StringProperty firstNameProp = new SimpleStringProperty();
+//
+//        lastNameProp.set("Clarcke");
+//        firstNameProp.set("Manuel");
+//        //esto es binding unidireccional
+//        //firstNameProp.bind(lastNameProp);
+//        firstNameProp.bindBidirectional(lastNameProp);
+//        //el valor de surName será el que tenga lastName
+//        System.out.println(firstNameProp.get());
+//        System.out.println(lastNameProp.get());
+//
+//        StringProperty fullNameProp = new SimpleStringProperty();
+//        fullNameProp.bind(Bindings.concat(firstNameProp, " ", lastNameProp));
+//        System.out.println(fullNameProp.get());
+//
+//        IntegerProperty length = new SimpleIntegerProperty(18);
+//        IntegerProperty width = new SimpleIntegerProperty(13);
+//
+//        IntegerProperty area = new SimpleIntegerProperty();
+//        area.bind(length.multiply(width));
+//
+//        NumberBinding perimeter = length.add(width).multiply(2);
+//
+//        System.out.println(area.get());
+//        System.out.println(perimeter.getValue());
 
-        SimpleStringProperty stringProp = new SimpleStringProperty();
-        System.out.println(stringProp.getValue());
-        stringProp.set("New Value");
-        System.out.println(stringProp.get());
+    private final StringProperty priority = new SimpleStringProperty();
+    private final StringProperty description = new SimpleStringProperty();
+    private final ObjectProperty<Integer> progress = new SimpleObjectProperty(0);
+    private final ObjectProperty<Integer> id = new SimpleObjectProperty<>(null);
 
-
-        ReadOnlyBooleanWrapper readOnlyBooleanWrapper = new ReadOnlyBooleanWrapper();
-        readOnlyBooleanWrapper.set(true);
-        ReadOnlyBooleanProperty readOnlyBooleanProperty = readOnlyBooleanWrapper.getReadOnlyProperty();
-
-        System.out.println(readOnlyBooleanProperty.get());
-        readOnlyBooleanWrapper.set(false);
-        System.out.println(readOnlyBooleanProperty.get());
-        //version normal
-//        intProp.addListener(new ChangeListener<Number>() {
-//            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-//                System.out.println("Integer Property is change to "+ newValue);
-//            }
-//        });
-        //version con lambas
-        intProp.addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue)->
-                System.out.println("Listerner 1 Integer Property is change to "+ newValue));
-        intProp.addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue)->
-                System.out.println(" Listener 2 Integer Property is change to "+ newValue));
-
-        intProp.addListener((Observable observable)-> {
-            System.out.println("Int property channged");
-        });
-
-
-        intProp.set(90);
-        intProp.set(100);
-
+    public Integer getId() {
+        return id.get();
     }
+
+    public ObjectProperty<Integer> idProperty() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id.set(id);
+    }
+
+    public Task() {
+    }
+    public Task(Integer id, String prority, String description, Integer progress) {
+        this.id.set(id);
+        this.priority.set(prority);
+        this.description.set(description);
+        this.progress.set(progress);
+    }
+
+
+
+    public String getPriority() {
+        return priority.get();
+    }
+
+    public StringProperty priorityProperty() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority.set(priority);
+    }
+
+    public String getDescription() {
+        return description.get();
+    }
+
+    public StringProperty descriptionProperty() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description.set(description);
+    }
+
+    public Integer getProgress() {
+        return progress.get();
+    }
+
+    public ObjectProperty<Integer> progressProperty() {
+        return progress;
+    }
+
+    public void setProgress(Integer progress) {
+        this.progress.set(progress);
+    }
+    //    }
 }

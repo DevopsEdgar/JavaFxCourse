@@ -37,9 +37,9 @@
          </GridPane.margin></ProgressBar>
       <TableView fx:id="taskTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1">
          <columns>
-            <TableColumn fx:id="priority" prefWidth="193.0" text="Priority" />
-            <TableColumn fx:id="description" minWidth="0.0" prefWidth="367.0" text="Description" />
-            <TableColumn fx:id="progress" prefWidth="166.0" text="Progress" />
+            <TableColumn fx:id="priorityColumn" prefWidth="193.0" text="Priority" />
+            <TableColumn fx:id="descriptionColumn" minWidth="0.0" prefWidth="367.0" text="Description" />
+            <TableColumn fx:id="progressColumn" prefWidth="166.0" text="Progress" />
          </columns>
       </TableView>
       <ComboBox fx:id="comboPriority" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
