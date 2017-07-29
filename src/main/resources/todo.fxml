@@ -5,6 +5,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -30,6 +31,10 @@
       <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="15.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
+      <ProgressBar fx:id="progressBar" prefHeight="34.0" prefWidth="401.0" progress="0.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin></ProgressBar>
       <TableView fx:id="taskTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1">
          <columns>
             <TableColumn fx:id="priority" prefWidth="193.0" text="Priority" />
@@ -38,7 +43,7 @@
          </columns>
       </TableView>
       <ComboBox fx:id="comboPriority" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <TextField fx:id="textDescription" prefHeight="31.0" prefWidth="311.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <TextField fx:id="textDescription" opacity="0.5" prefHeight="31.0" prefWidth="311.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <Button fx:id="addButton" mnemonicParsing="false" text="Add" GridPane.columnIndex="3" GridPane.rowIndex="2" />
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
          <children>
