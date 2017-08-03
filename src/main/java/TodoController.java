@@ -14,13 +14,30 @@ import java.util.HashMap;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import static javafx.beans.property.ReadOnlyIntegerProperty.readOnlyIntegerProperty;
-import static javafx.scene.control.ButtonType.OK;
 
 public class TodoController implements Initializable {
 
     private Task currentTask = new Task();
+
+
+
     private final ObservableList<Task> tasks = FXCollections.observableArrayList();
+
+
+
     private HashMap<Integer, Task> taskMap = new HashMap<>();
+
+    public void setTaskMap(HashMap<Integer, Task> initialTaskMap) {
+        taskMap.clear();
+        tasks.clear();
+        taskMap.putAll(initialTaskMap);
+        tasks.addAll(initialTaskMap.values());
+        lastId = taskMap.keySet().stream().max(Integer::compare).get();
+
+    }
+    public HashMap<Integer, Task> getTaskMap() {
+        return taskMap;
+    }
 
     @FXML
     private ProgressBar progressBar;
@@ -70,7 +87,7 @@ public class TodoController implements Initializable {
         ReadOnlyIntegerProperty intProgress = readOnlyIntegerProperty(progresspinner.valueProperty());
         progressBar.progressProperty().bind(intProgress.divide(100.0));
         comboPriority.valueProperty().bindBidirectional(currentTask.priorityProperty());
-        textDescription.textProperty().bindBidirectional(currentTask.descriptionProperty());
+//        textDescription.textProperty().bindBidirectional(currentTask.descriptionProperty());
         progresspinner.getValueFactory().valueProperty().bindBidirectional(currentTask.progressProperty());
 
         taskTable.setItems(tasks);
