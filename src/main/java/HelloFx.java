@@ -15,6 +15,15 @@ public class HelloFx extends Application{
         Scene scene = new Scene(gridPane, 800,500);
 
         stage.setScene(scene);
+
+//        scene.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//                System.out.println(event.getEventType().getName());
+//                event.consume();
+//
+//            }
+//        });
         stage.show();
 
     }

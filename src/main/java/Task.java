@@ -12,34 +12,6 @@ import javafx.beans.property.StringProperty;
 
 public class Task {
 
-//    public static void main(String[] args) {
-//        StringProperty lastNameProp = new SimpleStringProperty();
-//        StringProperty firstNameProp = new SimpleStringProperty();
-//
-//        lastNameProp.set("Clarcke");
-//        firstNameProp.set("Manuel");
-//        //esto es binding unidireccional
-//        //firstNameProp.bind(lastNameProp);
-//        firstNameProp.bindBidirectional(lastNameProp);
-//        //el valor de surName será el que tenga lastName
-//        System.out.println(firstNameProp.get());
-//        System.out.println(lastNameProp.get());
-//
-//        StringProperty fullNameProp = new SimpleStringProperty();
-//        fullNameProp.bind(Bindings.concat(firstNameProp, " ", lastNameProp));
-//        System.out.println(fullNameProp.get());
-//
-//        IntegerProperty length = new SimpleIntegerProperty(18);
-//        IntegerProperty width = new SimpleIntegerProperty(13);
-//
-//        IntegerProperty area = new SimpleIntegerProperty();
-//        area.bind(length.multiply(width));
-//
-//        NumberBinding perimeter = length.add(width).multiply(2);
-//
-//        System.out.println(area.get());
-//        System.out.println(perimeter.getValue());
-
     private final StringProperty priority = new SimpleStringProperty();
     private final StringProperty description = new SimpleStringProperty();
     private final ObjectProperty<Integer> progress = new SimpleObjectProperty(0);

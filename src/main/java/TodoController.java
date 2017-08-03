@@ -2,25 +2,25 @@
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.beans.property.ReadOnlyIntegerProperty;
-
-
-import javafx.beans.value.ObservableListValue;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Optional;
 import java.util.ResourceBundle;
-
 import static javafx.beans.property.ReadOnlyIntegerProperty.readOnlyIntegerProperty;
+import static javafx.scene.control.ButtonType.OK;
 
 public class TodoController implements Initializable {
 
     private Task currentTask = new Task();
     private final ObservableList<Task> tasks = FXCollections.observableArrayList();
+    private HashMap<Integer, Task> taskMap = new HashMap<>();
 
     @FXML
     private ProgressBar progressBar;
@@ -57,22 +57,14 @@ public class TodoController implements Initializable {
     private TextField textDescription;
 
     public void initialize(URL location, ResourceBundle resources) {
-        textDescription.setText("Esto es una prueba");
-        comboPriority.setPromptText("Elija uno");
-        comboPriority.getItems().addAll("High", "Medium", "Low");
 
+        comboPriority.getItems().addAll("High", "Medium", "Low");
         progresspinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0));
         progresspinner.valueProperty().addListener((ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) -> {
             if (newValue.intValue() == 100) checkBoxCompleted.setSelected(true);
             else checkBoxCompleted.setSelected(false);
-
-            tasks.add(new Task(25 + newValue, "Medium", "Fix Bug 2447895" + newValue, newValue));
-
             currentTask.setDescription(" " + newValue);
 
-//            System.out.println(currentTask.getDescription());
-//            System.out.println(currentTask.getPriority());
-//            System.out.println(currentTask.getProgress());
         });
 
         ReadOnlyIntegerProperty intProgress = readOnlyIntegerProperty(progresspinner.valueProperty());
@@ -86,10 +78,6 @@ public class TodoController implements Initializable {
         descriptionColumn.setCellValueFactory(rowData -> rowData.getValue().descriptionProperty());
         progressColumn.setCellValueFactory(rowData -> Bindings.concat(rowData.getValue().progressProperty(), "%"));
 
-        tasks.addAll(new Task(1, "HIGH", "Complete Design Document", 10),
-                new Task(2, "MEDIUM", "Update class Diagram", 0),
-                new Task(3, "LOW", "Fix Bug 243658", 0)
-        );
         StringBinding addButtonTextBinding = new StringBinding() {
             {
                 super.bind(currentTask.idProperty());
@@ -134,6 +122,45 @@ public class TodoController implements Initializable {
         currentTask.setId(selectedTask.getId());
         currentTask.setPriority(selectedTask.getPriority());
         currentTask.setDescription(selectedTask.getDescription());
+
+    }
+    int lastId = 0;
+    @FXML
+    public void addButtonClicked(ActionEvent actionEvent) {
+        if (currentTask.getId() == null){
+            Task t = new Task(++lastId,currentTask.getPriority(), currentTask.getDescription(), currentTask.getProgress());
+            tasks.add(t);
+            taskMap.put(lastId, t);
+        }
+        setCurrentTask(null);
+
+    }
+
+    @FXML
+    public void cancelButtonClicked(ActionEvent actionEvent) {
+        showAlertDialog();
+        setCurrentTask(null);
+        taskTable.getSelectionModel().clearSelection();
+
+
+    }
+    public  void showAlertDialog(){
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Are you want to cancell");
+        alert.setTitle("Cancell");
+        alert.getButtonTypes().remove(0,2);
+        alert.getButtonTypes().add(0, ButtonType.YES);
+        alert.getButtonTypes().add(1, ButtonType.NO);
+//        alert.setContentText("Content text");
+//        alert.showAndWait();
+        Optional<ButtonType> confirmationResponse = alert.showAndWait();
+        if (confirmationResponse.get() == ButtonType.YES){
+            System.out.println("ok");
+        }else{
+            System.out.println("cancel");
+        }
+
     }
 
 
